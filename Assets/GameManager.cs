@@ -20,11 +20,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Todo: fix
-        // if (player.transform.position.y <= -0.4f)
-        // {
-        //     player.transform.position = new Vector3(0, 10, 0);
-        // }
+        if (player.transform.position.y <= -0.4f)
+        {
+            player.transform.position = new Vector3(0, 10, 0);
+        }
     }
 
 
