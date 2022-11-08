@@ -536,6 +536,7 @@ MonoBehaviour:
   barrelModel: {fileID: 1000010455766620, guid: 1c5a9772a26e4b74991250d48f83f849, type: 3}
   player: {fileID: 1346825833}
   shipModel: {fileID: 8515472688152868816, guid: a1dcd447bfbb3bc45821f8b436c031d2, type: 3}
+  shipVariantModel: {fileID: 8800474089121227258, guid: 444e03a18ec5e4afe9f2a7d8e9183f91, type: 3}
 --- !u!4 &1504958343
 Transform:
   m_ObjectHideFlags: 0
@@ -567,7 +568,7 @@ GameObject:
   - component: {fileID: 1734315899}
   - component: {fileID: 1734315898}
   - component: {fileID: 1734315897}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
