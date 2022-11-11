@@ -533,7 +533,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dd923c33f96c4fe6bd6a07d9b570935, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barrelModel: {fileID: 1000010455766620, guid: 1c5a9772a26e4b74991250d48f83f849, type: 3}
+  barrelModels:
+  - {fileID: 1000010455766620, guid: 1c5a9772a26e4b74991250d48f83f849, type: 3}
+  - {fileID: 1000010753552304, guid: 1bfa92ca112491842ad5e3fb6b5ab535, type: 3}
   player: {fileID: 1346825833}
   shipModel: {fileID: 8515472688152868816, guid: a1dcd447bfbb3bc45821f8b436c031d2, type: 3}
   shipVariantModel: {fileID: 8800474089121227258, guid: 444e03a18ec5e4afe9f2a7d8e9183f91, type: 3}

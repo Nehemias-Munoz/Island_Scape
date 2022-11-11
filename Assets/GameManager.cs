@@ -1,42 +1,61 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
 
-    [SerializeField] private GameObject barrelModel;
+    [SerializeField] private GameObject[] barrelModels;
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject shipModel;
     [SerializeField] private GameObject shipVariantModel;
-
+    public static GameManager instance;
+    bool touchRespawnPoint = false;
+    Vector3 respawnPoint;
+    Vector3 respawnPosition;
     private int numberOfBarrels = 30;
+    //
+    // public bool TouchRespawnPoint {
+    //     get => touchRespawnPoint;
+    //     set
+    //     {
+    //       touchRespawnPoint = value;
+    //     }
+    // }
+ 
     // Start is called before the first frame update
     void Start()
     {
+        if(instance == null){
+          instance = this;
+        }
+
+        respawnPosition = new Vector3(0, 3, 0);
         GenerateLevel();
-        player.transform.position = new Vector3(0, 3, 0);
+        player.transform.position = respawnPosition;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (player.transform.position.y <= -0.4f)
+        if (player.transform.position.y < -0.4f)
         {
-            player.transform.position = new Vector3(0, 10, 0);
+            player.transform.position = respawnPosition; 
         }
     }
 
 
     void GenerateLevel()
     {
-        Instantiate(barrelModel, new Vector3(0, 1, 0), Quaternion.identity);
+        Instantiate(barrelModels[0], new Vector3(0, 1, 0), Quaternion.identity);
         for (int i = 0; i < numberOfBarrels; i++)
         {
-            Instantiate(barrelModel, new Vector3(Random.Range(-4,4),1,i*2.0F), Quaternion.Euler(0,Random.Range(-10,10), 0));
+            Instantiate(barrelModels[0], new Vector3(Random.Range(-4,4),1,i*2.0F), Quaternion.Euler(0,Random.Range(-10,10), 0));
 
-            if ( i == i / 2)
+            if ( i == numberOfBarrels / 2)
             {
+              Vector3 respawnBarrelPoint;
+                respawnPoint = new Vector3(Random.Range(-4,4),10,i*2.0F);
+                respawnBarrelPoint= new Vector3(Random.Range(-4,4),1.1f,i*2.0F);
+                Instantiate(barrelModels[1],respawnBarrelPoint,Quaternion.Euler(0,Random.Range(-10,10), 0));
                 Instantiate(shipVariantModel, new Vector3(60, 3, i), Quaternion.Euler(0,180,0));
                 Instantiate(shipVariantModel, new Vector3(-60, 3, i), Quaternion.identity);
             }
@@ -46,5 +65,10 @@ public class GameManager : MonoBehaviour
             }
         }
         
+    }
+
+    //Todo: fix respawnPoint
+    public void ChangeRespawnPosition(){
+      respawnPosition = respawnPoint;
     }
 }

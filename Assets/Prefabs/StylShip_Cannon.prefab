@@ -116,7 +116,7 @@ MonoBehaviour:
   _audioSource: {fileID: 2312105607805283538}
   shootSound: {fileID: 8300000, guid: 01266184db179472d88c0191383e4450, type: 3}
   aim: {fileID: 9180301437167847143}
-  shootForce: 1000
+  shootForce: 2000
 --- !u!82 &2312105607805283538
 AudioSource:
   m_ObjectHideFlags: 0
