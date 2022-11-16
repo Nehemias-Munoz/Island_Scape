@@ -47,8 +47,8 @@ public class GameManager : MonoBehaviour
             if ( i == numberOfBarrels / 2)
             {
               Vector3 respawnBarrelPoint;
-                respawnPoint = new Vector3(Random.Range(-4,4),10,i*2.0F);
-                respawnBarrelPoint= new Vector3(Random.Range(-4,4),1.1f,i*2.0F);
+                respawnPoint = new Vector3(4,10,i*2.0F);
+                respawnBarrelPoint= new Vector3(4,1.1f,i*2.0F);
                 Instantiate(barrelModels[1],respawnBarrelPoint,Quaternion.Euler(0,Random.Range(-10,10), 0));
                 Instantiate(shipVariantModel, new Vector3(60, 3, i), Quaternion.Euler(0,180,0));
                 Instantiate(shipVariantModel, new Vector3(-60, 3, i), Quaternion.identity);
