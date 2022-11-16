@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -7,20 +8,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject shipModel;
     [SerializeField] private GameObject shipVariantModel;
+    [SerializeField] private GameObject enemyModel;
     public static GameManager instance;
     bool touchRespawnPoint = false;
     Vector3 respawnPoint;
     Vector3 respawnPosition;
     private int numberOfBarrels = 30;
-    //
-    // public bool TouchRespawnPoint {
-    //     get => touchRespawnPoint;
-    //     set
-    //     {
-    //       touchRespawnPoint = value;
-    //     }
-    // }
- 
+     
     // Start is called before the first frame update
     void Start()
     {
@@ -62,6 +56,7 @@ public class GameManager : MonoBehaviour
             if (i == numberOfBarrels-1)
             {
                 Instantiate(shipModel, new Vector3(0, 3, i *2.3f), Quaternion.Euler(0,90,0));
+                StartCoroutine(SpawnEnemys(i));
             }
         }
         
@@ -71,4 +66,12 @@ public class GameManager : MonoBehaviour
     public void ChangeRespawnPosition(){
       respawnPosition = respawnPoint;
     }
+
+    IEnumerator SpawnEnemys(int i)
+    {
+        Instantiate(enemyModel,new Vector3(Random.Range(-10,10),20,i * 2.5f),Quaternion.identity);
+        yield return new WaitForSeconds(Random.Range(2.5f,3.5f));
+    }
+
+     
 }
