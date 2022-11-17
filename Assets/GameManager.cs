@@ -50,12 +50,12 @@ public class GameManager : MonoBehaviour
                 respawnPoint = new Vector3(4,10,i*2.0F);
                 respawnBarrelPoint= new Vector3(4,1.1f,i*2.0F);
                 Instantiate(barrelModels[1],respawnBarrelPoint,Quaternion.Euler(0,Random.Range(-10,10), 0));
-                Instantiate(shipVariantModel, new Vector3(60, 3, i), Quaternion.Euler(0,180,0));
-                Instantiate(shipVariantModel, new Vector3(-60, 3, i), Quaternion.identity);
+                Instantiate(shipVariantModel, new Vector3(40, 4, i), Quaternion.Euler(0,180,0));
+                Instantiate(shipVariantModel, new Vector3(-40, 4, i), Quaternion.identity);
             }
             if (i == numberOfBarrels-1)
             {
-                Instantiate(shipModel, new Vector3(0, 3, i *2.3f), Quaternion.Euler(0,90,0));
+                Instantiate(shipModel, new Vector3(0, 4, i *2.3f), Quaternion.Euler(0,90,0));
                 StartCoroutine(SpawnEnemys(i));
             }
         }
@@ -72,6 +72,8 @@ public class GameManager : MonoBehaviour
         Instantiate(enemyModel,new Vector3(Random.Range(-10,10),20,i * 2.5f),Quaternion.identity);
         yield return new WaitForSeconds(Random.Range(2.5f,3.5f));
     }
+
+
 
      
 }
