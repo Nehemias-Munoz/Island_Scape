@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     Vector3 respawnPoint;
     Vector3 respawnPosition;
     private int numberOfBarrels = 30;
-     
+    public float enemySpeed = 2.0f;
     // Start is called before the first frame update
     void Start()
     {
