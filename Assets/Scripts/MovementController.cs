@@ -41,10 +41,6 @@ public class MovementController : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
     }
 
-    void Jump()
-    {
-        
-    }
-}
+ }
 
 

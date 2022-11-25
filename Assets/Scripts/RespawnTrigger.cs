@@ -4,19 +4,9 @@ using UnityEngine;
 
 public class RespawnTrigger : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void OnCollisionEnter(Collision collision)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    void OnTriggerEnter(Collider other){
-      
-      GameManager.instance.ChangeRespawnPosition();
+      GameManager.instance.ChangeRespawnPosition();   
+        print("Respawn");
     }
 }
