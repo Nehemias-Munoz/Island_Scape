@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     private int numberOfBarrels = 30;
     public float enemySpeed = 2.0f;
     private int position = 0;
+    private int level = 1;
+    private float difficult = 1.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -25,8 +27,8 @@ public class GameManager : MonoBehaviour
           instance = this;
         }
 
-        respawnPosition = new Vector3(0, 3, 0);
         GenerateLevel();
+        respawnPosition = new Vector3(0, 3, 0);
         player.transform.position = respawnPosition;
     }
 
@@ -39,7 +41,7 @@ public class GameManager : MonoBehaviour
         }
         if (spawnEnemy && !UIManager.instance.isGamePause)
         {
-            StartCoroutine(SpawnEnemys(position)) ;
+            //StartCoroutine(SpawnEnemys(position)) ;
         }
     }
 
@@ -47,7 +49,7 @@ public class GameManager : MonoBehaviour
     void GenerateLevel()
     {
         Instantiate(barrelModels[0], new Vector3(0, 1, 0), Quaternion.identity);
-        for (int i = 0; i < numberOfBarrels; i++)
+        for (int i = 1; i < numberOfBarrels; i++)
         {
             Instantiate(barrelModels[0], new Vector3(Random.Range(-4,4),1,i*2.0F), Quaternion.Euler(0,Random.Range(-10,10), 0));
 
@@ -62,7 +64,7 @@ public class GameManager : MonoBehaviour
             }
             if (i == numberOfBarrels-1)
             {
-                Instantiate(shipModel, new Vector3(0, 4, i *2.3f), Quaternion.Euler(0,90,0));
+                Instantiate(shipModel, new Vector3(0, 2, i *2.3f), Quaternion.Euler(0,90,0));
                 spawnEnemy = true;
                 position = i;
             }
@@ -70,6 +72,11 @@ public class GameManager : MonoBehaviour
         
     }
 
+    public void NextLevel(){
+        GenerateLevel();
+        respawnPosition = new Vector3(0, 3, 0);
+        player.transform.position = respawnPosition;
+    }
     public void ChangeRespawnPosition(){
       respawnPosition = respawnPoint;
     }
