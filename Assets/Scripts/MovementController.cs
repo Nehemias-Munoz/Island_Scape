@@ -11,20 +11,28 @@ public class MovementController : MonoBehaviour
     [SerializeField] private float jumpHeight = 3f;
     [SerializeField] private Transform groundCheck;
     private bool isGrounded;
+    private bool isInRespawnPoint;
+
     private float groundDistance = 0.3f;
     private Vector3 movement;
     private Vector3 velocity;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask respawnLayer;
 
     // Update is called once per frame
     void Update()
     {
+        isInRespawnPoint = Physics.CheckSphere(groundCheck.position, groundDistance, respawnLayer); 
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundLayer);
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
         }
-        
+        if (isInRespawnPoint)
+        {
+            print("Respawn");
+            GameManager.instance.ChangeRespawnPosition();
+        }
         float xMove = Input.GetAxis("Horizontal");
         float zMove = Input.GetAxis("Vertical");
         
@@ -32,14 +40,18 @@ public class MovementController : MonoBehaviour
         movement = transform.right * xMove + transform.forward * zMove;
         controller.Move(movement * (speed * Time.deltaTime));
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump") && isGrounded || Input.GetButtonDown("Jump") && isInRespawnPoint)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
         }
 
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+    
+    
     }
+
+    
 
  }
 

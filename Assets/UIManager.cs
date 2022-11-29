@@ -6,7 +6,9 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private GameObject pausePanel;
+    [SerializeField] private GameObject gameInfo;
     public static UIManager instance;
+    private int counter;
 
     public bool isGamePause = true;
     // Start is called before the first frame update
@@ -14,6 +16,7 @@ public class UIManager : MonoBehaviour
     {
         ShowPauseMenu(true);
         Time.timeScale = 0;
+        counter = 0;
         if (instance == null)
         {
             instance = this;
@@ -24,6 +27,7 @@ public class UIManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
+            counter += 1;
             isGamePause = !isGamePause;
             Pause();
         }
@@ -40,17 +44,26 @@ public class UIManager : MonoBehaviour
         {
             Time.timeScale = 0;
             ShowPauseMenu(true);
+            if (counter > 0)
+            {
+                ShowGameInfo(true);
+            }
         }
         else
         {
             Time.timeScale = 1;
             ShowPauseMenu(false);
+            ShowGameInfo(false);
         }
     }
 
     void ShowPauseMenu(bool isActive)
     {
         pausePanel.SetActive(isActive);
+    }
+
+    void ShowGameInfo(bool isActive){
+        gameInfo.SetActive(isActive);
     }
 
     //private void Exit()
