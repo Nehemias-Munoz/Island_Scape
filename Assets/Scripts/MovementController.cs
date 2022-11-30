@@ -12,26 +12,32 @@ public class MovementController : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     private bool isGrounded;
     private bool isInRespawnPoint;
+    private bool isInNextLevelPoint;
 
     private float groundDistance = 0.3f;
     private Vector3 movement;
     private Vector3 velocity;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask respawnLayer;
+    [SerializeField] private LayerMask nextLevelLayer;
 
     // Update is called once per frame
     void Update()
     {
         isInRespawnPoint = Physics.CheckSphere(groundCheck.position, groundDistance, respawnLayer); 
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundLayer);
+        isInNextLevelPoint = Physics.CheckSphere(groundCheck.position, groundDistance, nextLevelLayer);
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
         }
         if (isInRespawnPoint)
         {
-            print("Respawn");
             GameManager.instance.ChangeRespawnPosition();
+        }
+
+        if (isInNextLevelPoint){
+            GameManager.instance.NextLevel();
         }
         float xMove = Input.GetAxis("Horizontal");
         float zMove = Input.GetAxis("Vertical");
@@ -47,7 +53,6 @@ public class MovementController : MonoBehaviour
 
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
-    
     
     }
 
