@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,24 +7,36 @@ public class GameOverSceneController : MonoBehaviour
 {
     [SerializeField] private TMP_Text secondText;
     private int secondCounter;
-    public int SecondCounter{
+    private bool setActive;
+    private int SecondCounter{
         get => secondCounter;
         set{
             secondCounter = value;
             UpdateSecondUI(secondCounter);
+            if (secondCounter <= 0)
+            {
+                SceneManager.LoadScene("GameplayScene");
+            }
         }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        SecondCounter = 10;
+        setActive = true;
+        gameObject.SetActive(setActive);
+        SecondCounter = 20;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P)){
+        if (setActive)
+        {
+            StartCoroutine(ResetLevel());
+        }
+        if(Input.GetKeyDown(KeyCode.P))
+        {
             SceneManager.LoadScene("GamePlayScene");
         }
 
@@ -34,12 +45,12 @@ public class GameOverSceneController : MonoBehaviour
         }
         
     }
-    public void UpdateSecondUI(int value){
+    private void UpdateSecondUI(int value){
         secondText.text =value.ToString();
     }
 
-    // IEnumerator ResetLevel(){
-    //     SecondCounter -=1;
-    //     yield return new WaitForSeconds(10);
-    // }
+    IEnumerator ResetLevel(){
+        yield return new WaitForSeconds(10f);
+        SecondCounter -=1;
+    }
 }
