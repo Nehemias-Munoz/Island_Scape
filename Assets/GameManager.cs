@@ -1,23 +1,46 @@
 using System.Collections;
 using UnityEngine;
 
+
 public class GameManager : MonoBehaviour
 {
+    #region  Variables
+    [Header("Level Prefabs")]
     [SerializeField] private GameObject[] barrelModels;
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject shipModel;
     [SerializeField] private GameObject shipVariantModel;
     [SerializeField] private GameObject enemyModel;
-    private bool spawnEnemy = false;
     public static GameManager instance;
-    bool touchRespawnPoint = false;
-    Vector3 respawnPoint;
-    Vector3 respawnPosition;
-    private int numberOfBarrels = 30;
+    
+    [Header("Level Settings")]
+    [SerializeField] private int numberOfBarrels = 30;
+    [SerializeField] private int difficult = 1;
+    private int level = 1;
+    
+    [Header("Enemy Settings")]
+    private bool spawnEnemy = false;
     public float enemySpeed = 2.0f;
     private int position = 0;
-    private int level = 1;
-    private int difficult = 1;
+    
+    [Header("Player Settings")]
+    private int playerLives;
+    public int PlayerLives {
+        get{
+            return playerLives;
+        }
+        set{
+            playerLives = value;
+            UIManager.instance.UpdateHealtUI(playerLives);
+            if(playerLives <=0){
+               UIManager.instance.ShowGameOverScene();
+            }
+        }
+    }
+    public int playerSpeed;
+    Vector3 respawnPoint;
+    Vector3 respawnPosition;
+    #endregion
 
     // Start is called before the first frame update
     void Start()
@@ -27,8 +50,9 @@ public class GameManager : MonoBehaviour
         }
 
         GenerateLevel();
-        respawnPosition = new Vector3(0, 3, 0);
+        respawnPosition = new Vector3(0, 5, 0);
         player.transform.position = respawnPosition;
+        PlayerLives = 3;
     }
 
     // Update is called once per frame
@@ -36,7 +60,7 @@ public class GameManager : MonoBehaviour
     {
         if (player.transform.position.y < -0.4f)
         {
-            player.transform.position = respawnPosition; 
+            Dead();
         }
         if (spawnEnemy && !UIManager.instance.isGamePause)
         {
@@ -44,10 +68,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
     void GenerateLevel()
     {
-        numberOfBarrels += difficult;
+        numberOfBarrels += level;
         Instantiate(barrelModels[0], new Vector3(0, 1, 0), Quaternion.identity);
         for (int i = 1; i < numberOfBarrels; i++)
         {
@@ -73,9 +96,11 @@ public class GameManager : MonoBehaviour
     }
 
     public void NextLevel(){
-        GenerateLevel();
-        respawnPosition = new Vector3(0, 3, 0);
-        player.transform.position = respawnPosition;
+        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        // GenerateLevel();
+        // respawnPosition = new Vector3(0, 3, 0);
+        // player.transform.position = respawnPosition;
+
     }
     public void ChangeRespawnPosition(){
       respawnPosition = respawnPoint;
@@ -88,6 +113,9 @@ public class GameManager : MonoBehaviour
     }
 
 
+    void Dead(){
+        PlayerLives-=1;
+        player.transform.position = respawnPosition; 
+    }
 
-     
 }

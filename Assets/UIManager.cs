@@ -1,27 +1,38 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject gameInfo;
+    [SerializeField] private TMP_Text livesText;
     public static UIManager instance;
     private int counter;
-
     public bool isGamePause = true;
+
+    // private int secondCounter;
+    // public int SecondCounter{
+    //     get => secondCounter;
+    //     set{
+    //         UpdateSecondUI(secondCounter);
+    //         if (secondCounter <= 0){
+    //             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    //         }
+    //     }
+    // }
+
     // Start is called before the first frame update
     void Start()
     {
-        ShowPauseMenu(true);
-        Time.timeScale = 0;
         counter = 0;
         if (instance == null)
         {
             instance = this;
         }
     }
+
 
     private void Update()
     {
@@ -33,8 +44,9 @@ public class UIManager : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.E) && isGamePause)
         {
-            print("Salir");
+            Exit();
         }
+
 
     }
 
@@ -43,10 +55,15 @@ public class UIManager : MonoBehaviour
         if (isGamePause)
         {
             Time.timeScale = 0;
-            ShowPauseMenu(true);
-            if (counter > 0)
-            {
-                ShowGameInfo(true);
+            if(GameManager.instance.PlayerLives <=0){
+                ShowGameOverScene();
+                // StartCoroutine(ResetLevel());
+            }else{
+                ShowPauseMenu(true);
+                if (counter > 0)
+                {
+                    ShowGameInfo(true);
+                }
             }
         }
         else
@@ -66,9 +83,19 @@ public class UIManager : MonoBehaviour
         gameInfo.SetActive(isActive);
     }
 
-    //private void Exit()
-    //{
+    public void UpdateHealtUI(int value){
+        livesText.text = value.ToString();
+    }
 
-    //}
+    
+
+    public void ShowGameOverScene(){
+        SceneManager.LoadScene("GameOverScene");
+    }
+
+    private void Exit()
+    {
+        Application.Quit();
+    }
 
 }

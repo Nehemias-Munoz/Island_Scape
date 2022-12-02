@@ -6,6 +6,10 @@ TagManager:
   tags:
   - WP
   - RespawnPoint
+  - Cannonball
+  - EnemyShip
+  - TeamShip
+  - Barrels
   layers:
   - Default
   - TransparentFX
