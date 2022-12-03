@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class GameManager : MonoBehaviour
@@ -96,11 +97,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void NextLevel(){
-        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        // GenerateLevel();
-        // respawnPosition = new Vector3(0, 3, 0);
-        // player.transform.position = respawnPosition;
-
+        SceneManager.LoadScene("NextLevelScene");
     }
     public void ChangeRespawnPosition(){
       respawnPosition = respawnPoint;

@@ -7,14 +7,14 @@ public class MovementController : MonoBehaviour
     // clase con metodos predifinidos para el movimiento, collisiones sin rigibody   
     public CharacterController controller;
     [SerializeField] private float speed = 20f;
-    [SerializeField] private float gravity = -9.8f;
+    const float gravity = -9.8f;
     [SerializeField] private float jumpHeight = 3f;
     [SerializeField] private Transform groundCheck;
     private bool isGrounded;
     private bool isInRespawnPoint;
     private bool isInNextLevelPoint;
 
-    private float groundDistance = 0.3f;
+    const float groundDistance = 0.3f;
     private Vector3 movement;
     private Vector3 velocity;
     [SerializeField] private LayerMask groundLayer;
