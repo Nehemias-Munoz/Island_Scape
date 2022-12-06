@@ -8,20 +8,19 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject gameInfo;
     [SerializeField] private TMP_Text livesText;
+    [SerializeField] private TMP_Text secondText;
     public static UIManager instance;
     private int counter;
     public bool isGamePause = true;
-
-    // private int secondCounter;
-    // public int SecondCounter{
-    //     get => secondCounter;
-    //     set{
-    //         UpdateSecondUI(secondCounter);
-    //         if (secondCounter <= 0){
-    //             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    //         }
-    //     }
-    // }
+    private int secondCounter;
+    public int SecondCounter{
+        get => secondCounter;
+        set
+        {
+            secondCounter = value;
+            UpdateSecondUI(secondCounter);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -44,9 +43,10 @@ public class UIManager : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.E) && isGamePause)
         {
-            Exit();
+            Exit(); 
         }
 
+        SecondCounter += (int)Time.deltaTime;
 
     }
 
@@ -87,7 +87,10 @@ public class UIManager : MonoBehaviour
         livesText.text = value.ToString();
     }
 
-    
+    public void UpdateSecondUI(int value)
+    {
+        secondText.text = value.ToString();
+    }
 
     public void ShowGameOverScene(){
         SceneManager.LoadScene("GameOverScene");

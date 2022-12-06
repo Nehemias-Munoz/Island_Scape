@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
             }
             if (i == numberOfBarrels-1)
             {
-                Instantiate(shipModel, new Vector3(0, 6f, i *2.3f), Quaternion.Euler(0,90,0));
+                Instantiate(shipModel, new Vector3(0, 5, i *2.3f), Quaternion.Euler(0,90,0));
                 spawnEnemy = true;
                 position = i;
             }
