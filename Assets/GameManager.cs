@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 
 public class GameManager : MonoBehaviour
@@ -20,9 +22,8 @@ public class GameManager : MonoBehaviour
     private int level = 1;
     
     [Header("Enemy Settings")]
-    private bool spawnEnemy = false;
-    public float enemySpeed = 2.0f;
-    private int position = 0;
+    public float enemySpeed;
+    private int position;
     
     [Header("Player Settings")]
     private int playerLives;
@@ -54,18 +55,15 @@ public class GameManager : MonoBehaviour
         respawnPosition = new Vector3(0, 5, 0);
         player.transform.position = respawnPosition;
         PlayerLives = 3;
+        StartCoroutine(SpawnEnemys(position));
+
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (player.transform.position.y < -0.4f)
         {
             Dead();
-        }
-        if (spawnEnemy && !UIManager.instance.isGamePause)
-        {
-            //StartCoroutine(SpawnEnemys(position)) ;
         }
     }
 
@@ -89,7 +87,6 @@ public class GameManager : MonoBehaviour
             if (i == numberOfBarrels-1)
             {
                 Instantiate(shipModel, new Vector3(0, 5, i *2.3f), Quaternion.Euler(0,90,0));
-                spawnEnemy = true;
                 position = i;
             }
         }
