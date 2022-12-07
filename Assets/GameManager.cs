@@ -20,6 +20,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int numberOfBarrels = 30;
     [SerializeField] private int difficult = 1;
     private int level = 1;
+
+    public int Level
+    {
+        get => level;
+        set
+        {
+            level = value;
+            UIManager.instance.UpdateLevelUI(level);
+        }
+        
+    }
     
     [Header("Enemy Settings")]
     public float enemySpeed;
@@ -39,7 +50,6 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-    public int playerSpeed;
     Vector3 respawnPoint;
     Vector3 respawnPosition;
     #endregion
@@ -95,6 +105,7 @@ public class GameManager : MonoBehaviour
 
     public void NextLevel(){
         SceneManager.LoadScene("NextLevelScene");
+        Level += 1;
     }
     public void ChangeRespawnPosition(){
       respawnPosition = respawnPoint;

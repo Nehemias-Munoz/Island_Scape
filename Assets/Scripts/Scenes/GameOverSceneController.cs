@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameOverSceneController : MonoBehaviour
 {
     [SerializeField] private TMP_Text secondText;
+    [SerializeField] private TMP_Text levelText;
     private int secondCounter;
     private bool setActive;
     private int SecondCounter{
@@ -26,6 +27,7 @@ public class GameOverSceneController : MonoBehaviour
         setActive = true;
         gameObject.SetActive(setActive);
         SecondCounter = 20;
+        levelText.text = GameManager.instance.Level.ToString();
     }
 
     // Update is called once per frame

@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject gameInfo;
     [SerializeField] private TMP_Text livesText;
+    [SerializeField] private TMP_Text levelText;
     [SerializeField] private TMP_Text secondText;
     public static UIManager instance;
     private int counter;
@@ -85,6 +86,9 @@ public class UIManager : MonoBehaviour
 
     public void UpdateHealtUI(int value){
         livesText.text = value.ToString();
+    }
+    public void UpdateLevelUI(int value){
+        levelText.text = value.ToString();
     }
 
     public void UpdateSecondUI(int value)
