@@ -20,7 +20,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int numberOfBarrels = 30;
     [SerializeField] private int difficult = 1;
     private int level = 1;
-
+    
+    [Header("Audio")]
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip respawnSound;
     public int Level
     {
         get => level;
@@ -109,6 +112,7 @@ public class GameManager : MonoBehaviour
     }
     public void ChangeRespawnPosition(){
       respawnPosition = respawnPoint;
+      _audioSource.PlayOneShot(respawnSound);
     }
 
     IEnumerator SpawnEnemys(int i)
