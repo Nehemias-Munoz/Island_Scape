@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2170376970781494876}
   - component: {fileID: 5825649365006218380}
   - component: {fileID: 3520280827853628638}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StylShip_FloorMid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2751,7 +2751,7 @@ GameObject:
   - component: {fileID: 1215978550854444905}
   - component: {fileID: 7354280574297924435}
   - component: {fileID: 8036749256337994602}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StylShip_FencingMid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3337,7 +3337,7 @@ GameObject:
   - component: {fileID: 5587073485698090408}
   - component: {fileID: 8750773990529344458}
   - component: {fileID: 7944351521576922506}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StylShip_Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3533,7 +3533,7 @@ GameObject:
   - component: {fileID: 5913891099610157174}
   - component: {fileID: 4984508867461414537}
   - component: {fileID: 3302929868412809936}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StylShip_Bracing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
