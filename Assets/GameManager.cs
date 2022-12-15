@@ -68,8 +68,11 @@ public class GameManager : MonoBehaviour
         respawnPosition = new Vector3(0, 5, 0);
         player.transform.position = respawnPosition;
         PlayerLives = 3;
-        StartCoroutine(SpawnEnemys(position));
+    }
 
+    private void Awake()
+    {
+        StartCoroutine(SpawnEnemys(position));
     }
 
     void Update()
