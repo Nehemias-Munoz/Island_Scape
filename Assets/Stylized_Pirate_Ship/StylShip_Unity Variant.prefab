@@ -195,6 +195,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StylShip_Cannon (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 593950583297973655, guid: 6b904fd4d58a64b72be7fbff2d2f5fcc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4133637694233444097, guid: 6b904fd4d58a64b72be7fbff2d2f5fcc, type: 3}
       propertyPath: m_RootOrder
       value: 43
